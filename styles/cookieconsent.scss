@@ -1,6 +1,4 @@
-/**
-CORE STYLES
-*/
+@import "_variables";
 
 #cc-notification
 {
@@ -26,7 +24,7 @@ CORE STYLES
 	position: absolute !important;
 	top: 2px !important;
 	right: 2px !important;
-	background-image: url(https://s3-eu-west-1.amazonaws.com/assets.cookieconsent.silktide.com/cross.png) !important;
+	background-image: url($closebutton-image) !important;
 }
 
 #cc-modal #cc-modal-closebutton a span,
@@ -187,7 +185,7 @@ CORE STYLES
 }
 
 #cc-modal a#footerlogo span {
-	background: url("https://s3-eu-west-1.amazonaws.com/assets.cookieconsent.silktide.com/silktide-logo.png") no-repeat scroll 0 0 transparent !important;
+	background: url($silktide-image) no-repeat scroll 0 0 transparent !important;
 	display: block;
 	height: 31px !important;
 	margin-top: 4px !important;
@@ -242,7 +240,7 @@ CORE STYLES
 #cc-modal .cc-logo,
 #cc-settingsmodal .cc-logo
 {
-	background-image: url(https://s3-eu-west-1.amazonaws.com/assets.cookieconsent.silktide.com/cookie-consent-logo.png);
+	background-image: url($cclogo-image);
 	width: 142px;
 	height: 32px;
 	position: absolute;
@@ -928,10 +926,6 @@ DARK STYLE
 	-moz-border-radius: 5px !important;
 	-webkit-border-radius: 5px !important;
 
-	/*box-shadow:1px 1px 2px #000;*/
-	/*-moz-box-shadow:1px 1px 2px #000;*/
-	/*-webkit-box-shadow:1px 1px 2px #000;*/
-
 	transition:background 0.2s ease-in-out 0s, color 0.2s ease-in-out 0s, box-shadow 0.2s ease-in-out 0s;
 	-moz-transition:background 0.2s ease-in-out 0s, color 0.2s ease-in-out 0s, -moz-box-shadow 0.2s ease-in-out 0s;
 	-webkit-transition:background 0.2s ease-in-out 0s, color 0.2s ease-in-out 0s, -webkit-box-shadow 0.2s ease-in-out 0s;
@@ -976,7 +970,6 @@ DARK STYLE
 	font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
 	font-size: 12pt !important;
 	background-color: #1d1d1d !important;
-	/*background-image: url(http://assets.cookieconsent.silktide.com/cookie-consent-box.png);*/
 	background-repeat: no-repeat;
 	background-position: 6px 7px;
 	color: #F5F5F5 !important;
@@ -1242,7 +1235,7 @@ DARK STYLE
 	position: relative !important;
 	overflow-x: hidden;
 	max-height: 560px;
-	background-image: url(https://s3-eu-west-1.amazonaws.com/assets.cookieconsent.silktide.com/globe.png);
+	background-image: url($globe-image);
 	background-position: -20px 20px;
 	background-repeat: no-repeat;
 	box-shadow:0px 0px 30px #000;
@@ -1362,7 +1355,7 @@ DARK STYLE
 
 #cc-modal #cc-modal-closebutton a,
 #cc-settingsmodal #cc-settingsmodal-closebutton a {
-	background-image: url("https://s3-eu-west-1.amazonaws.com/assets.cookieconsent.silktide.com/modal-close.png") !important;
+	background-image: url($modalclose-image) !important;
 	display: block !important;
 	height: 24px !important;
 	position: absolute !important;

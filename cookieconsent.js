@@ -71,7 +71,8 @@ var cc =
         "SK",
         "FI",
         "SE",
-        "UK"
+        "UK",
+        "GB"
     ],
     settings: {
         refreshOnConsent: false,

@@ -147,6 +147,8 @@ var cc =
     },
 
     onconsent: function (cookieType, input) {
+        var fn, scriptname;
+
         if (cc.isfunction(input)) {
             fn = input;
         }
@@ -189,8 +191,9 @@ var cc =
     },
 
     setup: function () {
+        var verstr, parts, versionRequired, jqueryOk;
         jQuery.each(cc.bindfunctions, function (key, value) {
-            for (i = 0; i < value.length; i++) {
+            for (var i = 0; i < value.length; i++) {
                 jQuery(document).bind("cc_" + key, value[i]);
             }
         });
@@ -198,12 +201,13 @@ var cc =
         parts = verstr.split('.');
         versionRequired = cc.jqueryversionrequired.split('.');
         jqueryOk = true;
-        for (i = 0; i < parts.length && i < versionRequired.length; i++) {
-            currentpart = parseInt(parts[i]);
-            requiredpart = parseInt(versionRequired[i]);
+        for (var i = 0; i < parts.length && i < versionRequired.length; i++) {
+            var currentpart = parseInt(parts[i]),
+                requiredpart = parseInt(versionRequired[i]);
+
             if (currentpart < requiredpart) {
                 /* Unsatisfied - this part of the version string is less than the version we require */
-                jqueryok = false;
+                jqueryOk = false;
                 break;
             }
             if (currentpart > requiredpart) {
@@ -288,27 +292,34 @@ var cc =
         }
 
         for (var attrname in cc.initobj.cookies) {
-            cc.cookies[attrname] = cc.initobj.cookies[attrname];
-            if (cc.settings.testmode == "accept") {
-                cc.approved[attrname] = "yes";
-            }
-            if (cc.settings.testmode == "decline") {
-                cc.approved[attrname] = "no";
+            if (cc.initobj.cookies.hasOwnProperty(attrname)) {
+                cc.cookies[attrname] = cc.initobj.cookies[attrname];
+                if (cc.settings.testmode == "accept") {
+                    cc.approved[attrname] = "yes";
+                }
+                if (cc.settings.testmode == "decline") {
+                    cc.approved[attrname] = "no";
+                }
             }
         }
 
     },
 
     initialise: function (obj) {
+        var attrname;
         cc.initobj = obj;
         if (obj.settings !== undefined) {
-            for (var attrname in obj.settings) {
-                this.settings[attrname] = obj.settings[attrname];
+            for (attrname in obj.settings) {
+                if (obj.settings.hasOwnProperty(attrname)) {
+                    this.settings[attrname] = obj.settings[attrname];
+                }
             }
         }
         if (obj.strings !== undefined) {
-            for (var attrname in obj.strings) {
-                this.strings[attrname] = obj.strings[attrname];
+            for (attrname in obj.strings) {
+                if (obj.strings.hasOwnProperty(attrname)) {
+                    this.strings[attrname] = obj.strings[attrname];
+                }
             }
         }
         cc.settings.style = "cc-" + cc.settings.style;
@@ -323,8 +334,9 @@ var cc =
     },
 
     calculatestatsparams: function () {
-        params = "c=";
-        first = true;
+        var params = "c=",
+            first = true;
+
         jQuery.each(cc.initobj.cookies, function (key, value) {
             if (first) {
                 first = false;
@@ -415,9 +427,11 @@ var cc =
         });
 
         for (var attrname in data) {
-            cc.remoteCookies[attrname] = data[attrname];
-            if (this.approved[attrname] != "yes" && this.approved[attrname] != "no") {
-                this.approved[attrname] = data[attrname];
+            if (data.hasOwnProperty(attrname)) {
+                cc.remoteCookies[attrname] = data[attrname];
+                if (this.approved[attrname] != "yes" && this.approved[attrname] != "no") {
+                    this.approved[attrname] = data[attrname];
+                }
             }
         }
         jQuery.each(cc.cookies, function (key, value) {
@@ -608,6 +622,7 @@ var cc =
     },
 
     locationcallback: function (data) {
+        var ineu;
         if (data.statusCode == "OK" && data.countryCode) {
             ineu = "yes";
             if (jQuery.inArray(data.countryCode, cc.eumemberstates) == -1) {
@@ -637,6 +652,7 @@ var cc =
     },
 
     checkapproval: function () {
+        var ineu;
         if (!cc.checkedipdb && cc.settings.onlyshowwithineu) {
             cc.checkedipdb = true;
             ineu = cc.getcookie('cc_ineu');
@@ -790,6 +806,7 @@ var cc =
     },
 
     onremoteconsentgiven: function () {
+        var urlx;
         if (cc.settings.clickAnyLinkToConsent) {
             jQuery("a").filter(':not(.cc-link)').unbind("click");
         }
@@ -844,8 +861,10 @@ var cc =
     },
 
     onlocalconsentgiven: function () {
-        enableall = false;
-        enablejustone = false;
+        var enableall = false,
+            enablejustone = false,
+            elem;
+
         if (jQuery(this).hasClass('cc-button-enableall') || jQuery(this).hasClass('cc-button-enable-all')) {
             enableall = true;
             jQuery.each(cc.cookies, function (key, value) {
@@ -992,6 +1011,7 @@ var cc =
     },
 
     closepreferencesmodal: function () {
+        var urlx;
         jQuery.each(cc.defaultCookies, function (key, value) {
             value = jQuery('#cc-globalpreference-selector-' + key).val();
             if (cc.approved[key] != "yes" && cc.approved[key] != "no") {
@@ -1030,6 +1050,8 @@ var cc =
     },
 
     showhidemodal: function () {
+        var thisval;
+
         jQuery(this).blur();
         cc.checkedlocal = false;
         cc.checkedremote = false;
@@ -1149,7 +1171,7 @@ var cc =
     },
 
     approvedeny: function () {
-        key = jQuery(this).attr("id").split("-")[2];
+        var key = jQuery(this).attr("id").split("-")[2];
         if (cc.cookies[key].approved) {
             cc.cookies[key].approved = false;
             cc.approved[key] = "no";
@@ -1184,6 +1206,7 @@ var cc =
     },
 
     gotosettings: function () {
+        var buttontext;
         if (jQuery('#cc-modal').is(":visible")) {
             cc.showhidemodal();
         }
@@ -1264,7 +1287,7 @@ var cc =
             jQuery('.cc-button-enable-' + key).addClass('cc-link').click(cc.onlocalconsentgiven);
         });
     }
-}
+};
 
 if (!(window.jQuery)) {
     var s = document.createElement('script');

@@ -1,15 +1,17 @@
-Cookie Consent
-==============
+# Cookie Consent [Deprecated]
 
 Javascript plugin allowing a website to comply with the EU cookie law.
 
-By the way
-----------
-We've released a new version of this. Check it out: [cookieconsent2](https://github.com/silktide/cookieconsent2)
+## Deprecation
+The web has moved on substantually since this was originally created, both in terms of technology and in terms of cookie laws.
 
+This project was originally written heavily in jQuery and isn't particularly performant, something that is becoming more and more important in todays web.
 
-Features
---------
+We've since released a [new version](https://github.com/insites/cookieconsent) that is built more up to modern web standards.
+
+## Legacy Readme
+
+### Features
 
 * Free to use and modify
 * Only show to EU visitors
@@ -17,13 +19,12 @@ Features
 * Implied or explicit consent
 * Works with [do not track](http://donottrack.us/)
 
-Integration
------------
+### Integration
+
 Refer to the [Cookie Consent website](http://sitebeam.net/cookieconsent/) for detailed integration documentation and
  our simple [configuration wizard](http://sitebeam.net/cookieconsent/code/) to see what can be customized.
 
-Basic usage
------------
+### Basic usage
 
     <link rel="stylesheet" type="text/css" href="cookieconsent.css"/>
     <script type="text/javascript" src="cookieconsent.js"></script>
@@ -44,6 +45,5 @@ Basic usage
     // ]]>
     </script>
 
-Credits
--------
-Created by [Silktide](http://silktide.com).
+### Credits
+Created by [Silktide](https://silktide.com).
